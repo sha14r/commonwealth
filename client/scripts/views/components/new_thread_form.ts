@@ -28,6 +28,7 @@ import EditProfileModal from 'views/modals/edit_profile_modal';
 
 import QuillFormattedText from './quill_formatted_text';
 import MarkdownFormattedText from './markdown_formatted_text';
+import { TextInput } from './component_kit/forms';
 
 interface IThreadForm {
   topicName?: string;
@@ -559,7 +560,7 @@ export const NewThreadForm: m.Component<{
             ])
             : null,
           m(FormGroup, { span: { xs: 12, sm: (hasTopics ? 7 : 12) }, order: 2 }, [
-            m(Input, {
+            m(TextInput, {
               placeholder: 'https://',
               oninput: (e) => {
                 e.redraw = false; // do not redraw on input
@@ -568,15 +569,13 @@ export const NewThreadForm: m.Component<{
                 localStorage.setItem(`${app.activeId()}-new-link-storedLink`, vnode.state.form.url);
               },
               defaultValue: vnode.state.form.url,
-              tabindex: 2,
+              additionalAttrs: { tabindex: 2 },
             }),
           ]),
           m(FormGroup, { order: 3 },  [
-            m(Input, {
-              class: 'new-thread-title',
+            m(TextInput, {
               placeholder: 'Title',
               name: 'new-link-title',
-              autocomplete: 'off',
               oninput: (e) => {
                 e.redraw = false; // do not redraw on input
                 const { value } = e.target as any;
@@ -585,7 +584,7 @@ export const NewThreadForm: m.Component<{
                 localStorage.setItem(`${app.activeId()}-new-link-storedTitle`, vnode.state.form.linkTitle);
               },
               defaultValue: vnode.state.form.linkTitle,
-              tabindex: 3,
+              additionalAttrs: { tabindex: 3 },
             }),
           ]),
           m(FormGroup, { order: 4 }, [

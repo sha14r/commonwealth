@@ -8,6 +8,7 @@ import { loginWithMagicLink } from 'controllers/app/login';
 import { notifySuccess } from 'controllers/app/notifications';
 import LoginWithWalletDropdown from 'views/components/login_with_wallet_dropdown';
 import LinkNewAddressModal from 'views/modals/link_new_address_modal';
+import { TextInput } from './component_kit/forms';
 
 const exitWithMagicLoginComplete = () => {
   $('.LoginModal').trigger('modalforceexit');
@@ -43,18 +44,20 @@ const Login: m.Component<{}, {
     }, [
       m(Form, { gutter: 10 }, [
         !vnode.state.showMagicLoginPrompt && m(FormGroup, { span: 9 }, [
-          m(Input, {
-            fluid: true,
+          m(TextInput, {
             name: 'email',
             placeholder: 'Email',
             disabled: !!defaultEmail,
             defaultValue: defaultEmail,
-            autocomplete: 'off',
             onclick: (e) => {
               e.stopPropagation();
             },
             oncreate: (vvnode) => {
               $(vvnode.dom).focus();
+            },
+            additionalAttrs: {
+              autocomplete: 'off',
+              style: 'width: 100%',
             }
           }),
         ]),

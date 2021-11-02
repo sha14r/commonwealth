@@ -9,13 +9,18 @@ export enum TextInputStatus {
 
 export const TextInput: m.Component<
   {
-    name: string;
-    oninput?: (e) => null;
+    name?: string;
+    oncreate?: (e) => any;
+    onclick?: (e) => any;
+    oninput?: (e) => any;
     inputValidationFn?: (value: string) => [TextInputStatus, string];
     label?: string;
     className?: string;
     placeholder?: string;
     defaultValue?: string;
+    autocomplete?: string;
+    disabled?: boolean;
+    additionalAttrs?;
   },
   {
     statusMessage: string;
@@ -27,19 +32,28 @@ export const TextInput: m.Component<
   view: (vnode) => {
     const {
       name,
+      oncreate,
+      onclick,
       oninput,
       inputValidationFn,
       label,
       className,
       placeholder,
       defaultValue,
+      disabled,
+      autocomplete,
+      additionalAttrs
     } = vnode.attrs;
     const { statusMessage, statusType } = vnode.state;
-    return m('.TextInput', [
+    return m('.TextInput', additionalAttrs, [
       label && m('label', label),
       m(Input, {
         class: `${className || ''} ${statusType || ''}`,
         name,
+        disabled,
+        autocomplete,
+        oncreate,
+        onclick,
         oninput: (e) => {
           e.preventDefault();
           e.stopPropagation();

@@ -5,6 +5,7 @@ import { blake2AsHex } from '@polkadot/util-crypto';
 import app from 'state';
 import { DropdownFormField } from 'views/components/forms';
 import Substrate from 'controllers/chain/substrate/main';
+import { TextInput } from './component_kit/forms';
 
 const EdgewareFunctionPicker = {
   form: { module: '', function: '', args: [] },
@@ -72,55 +73,47 @@ const EdgewareFunctionPicker = {
       ]),
       m('div', argumentInputs.map(({ name, type }, index) => {
         if (`${type}` === 'Compact<BalanceOf>') {
-          return m(FormGroup, [
-            m(FormLabel, `${name} (${app.chain.currency})`),
-            m(Input, {
-              placeholder: `${name} (${app.chain.currency})`,
-              oninput: (e) => {
-                const result = (e.target as any).value;
-                vnode.state.form.args[index] = app.chain.chain.coins(parseFloat(result), true);
-                m.redraw(); // TODO: why is this needed?
-              }
-            })
-          ]);
+          return m(TextInput, {
+            placeholder: `${name} (${app.chain.currency})`,
+            label: `${name} (${app.chain.currency})`,
+            oninput: (e) => {
+              const result = (e.target as HTMLInputElement).value;
+              vnode.state.form.args[index] = app.chain.chain.coins(parseFloat(result), true);
+              m.redraw(); // TODO: why is this needed?
+            }
+          });
         }
 
         if ((`${type}`).match(/Vec<[A-Za-z]+>/)) {
-          return m(FormGroup, [
-            m(FormLabel, `${name} (${type})`),
-            m(Input, {
-              placeholder: `${name} (${type})`,
-              oninput: (e) => {
-                const result = (e.target as any).value;
-                vnode.state.form.args[index] = result.split(',').map((str) => str.trim());
-                m.redraw(); // TODO: why is this needed?
-              },
-            }),
-          ]);
+          return m(TextInput, {
+            label: `${name} (${type})`,
+            placeholder: `${name} (${type})`,
+            oninput: (e) => {
+              const result = (e.target as HTMLInputElement).value;
+              vnode.state.form.args[index] = result.split(',').map((str) => str.trim());
+              m.redraw(); // TODO: why is this needed?
+            },
+          });
         }
 
-        return m(FormGroup, [
-          m(FormLabel, `${name}`),
-          m(Input, {
+        return m(TextInput, {
+            label: name,
             placeholder: `${name} (${type})`,
             oninput: (e) => {
               const result = (e.target as any).value;
               vnode.state.form.args[index] = result;
               m.redraw(); // TODO: why is this needed?
             }
-          }),
-        ]);
+          });
       })),
-
-      m(FormGroup, { style: 'margin-top: 20px' }, [
-        m(FormLabel, 'Proposal Hash'),
-        m(Input, {
-          disabled: true,
-          value: (EdgewareFunctionPicker.getMethod())
+      m(TextInput, {
+        disabled: true,
+        label: 'ProposalHash',
+        defaultValue: (EdgewareFunctionPicker.getMethod())
             ? blake2AsHex(EdgewareFunctionPicker.getMethod().toHex())
             : '',
-        }),
-      ]),
+        additionalAttrs: { style: 'margin-top: 20px' },
+      })
     ]);
   }
 };
