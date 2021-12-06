@@ -14,6 +14,12 @@ export enum IconIntent {
   Secondary = 'secondary',
 }
 
+interface IconAttrs {
+  size: IconSize;
+  intent: IconIntent;
+  disabled?: boolean;
+}
+
 const appendTags = (className: string, attrs) => {
   const { intent, disabled, size } = attrs;
   let tag = `svg.Icon.${className}`;
@@ -26,14 +32,7 @@ const appendTags = (className: string, attrs) => {
   return tag;
 };
 
-export const ArrowDownIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const ArrowDownIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('ArrowDownIcon', vnode.attrs),
@@ -53,14 +52,7 @@ export const ArrowDownIcon: m.Component<
   },
 };
 
-export const ArrowRightIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const ArrowRightIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('ArrowRightIcon', vnode.attrs),
@@ -80,14 +72,7 @@ export const ArrowRightIcon: m.Component<
   },
 };
 
-export const ReplyIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const ReplyIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     const { size, disabled } = vnode.attrs;
     return [
@@ -129,14 +114,7 @@ export const ReplyIcon: m.Component<
   },
 };
 
-export const ViewsIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const ViewsIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('ViewsIcon', vnode.attrs),
@@ -165,14 +143,7 @@ export const ViewsIcon: m.Component<
   },
 };
 
-export const CreateIcon: m.Component<
-  {
-    size: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const CreateIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     const { size } = vnode.attrs;
     return [
@@ -212,14 +183,7 @@ export const CreateIcon: m.Component<
   },
 };
 
-export const LikesIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const LikesIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     const { size } = vnode.attrs;
     return [
@@ -263,14 +227,7 @@ export const LikesIcon: m.Component<
   },
 };
 
-export const ShareIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const ShareIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('ShareIcon', vnode.attrs),
@@ -291,14 +248,7 @@ export const ShareIcon: m.Component<
   },
 };
 
-export const AccountIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const AccountIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     const { size } = vnode.attrs;
     return [
@@ -378,14 +328,7 @@ export const ExternalLinkIcon: m.Component<{
   },
 };
 
-export const CopyIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const CopyIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('CopyIcon', vnode.attrs),
@@ -422,14 +365,7 @@ export const CopyIcon: m.Component<
 // > = {
 // };
 
-export const NotificationIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const NotificationIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     const { size } = vnode.attrs;
     return [
@@ -467,14 +403,7 @@ export const NotificationIcon: m.Component<
   },
 };
 
-export const PinIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const PinIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('PinIcon', vnode.attrs),
@@ -500,14 +429,7 @@ export const PinIcon: m.Component<
   },
 };
 
-export const XIcon: m.Component<
-  {
-    size?: IconSize;
-    intent: IconIntent;
-    disabled?: boolean;
-  },
-  {}
-> = {
+export const XIcon: m.Component<IconAttrs, {}> = {
   view: (vnode) => {
     return m(
       appendTags('XIcon', vnode.attrs),
